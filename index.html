@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> Kurma Quiz</h1>
+            <p>Website Kuis Interaktif Pribadi</p>
+        </header>
+
+        <div class="card" id="title-section">
+            <h2>Buat Kuis Baru</h2>
+            <div class="input-group">
+                <input type="text" id="quiz-title" placeholder="Masukkan Judul Kuis">
+                <button class="btn primary" onclick="setTitle()">Simpan Judul</button>
+            </div>
+        </div>
+
+        <div class="card" id="quiz-options" style="display: none;">
+            <h2>Pilih Mode Kuis</h2>
+            <div class="btn-group">
+                <button class="btn option" onclick="setMode('classic')">
+                    <i class="fas fa-book"></i> Mode Klasik
+                </button>
+                <button class="btn option" onclick="setMode('timed')">
+                    <i class="fas fa-clock"></i> Mode Waktu
+                </button>
+            </div>
+        </div>
+
+        <div class="card" id="time-options" style="display: none;">
+            <h2>Pilih Durasi per Soal</h2>
+            <div class="input-group">
+                <select id="time-limit" class="select-time">
+                    <option value="10">10 Detik</option>
+                    <option value="15">15 Detik</option>
+                    <option value="30">30 Detik</option>
+                    <option value="45">45 Detik</option>
+                    <option value="60">1 Menit</option>
+                    <option value="180">3 Menit</option>
+                </select>
+                <button class="btn primary" onclick="confirmTime()">Lanjut</button>
+            </div>
+        </div>
+
+        <div class="card" id="input-section" style="display: none;">
+            <h2 id="display-title"></h2>
+            <p class="mode-display" id="mode-display"></p>
+            
+            <div class="input-group">
+                <input type="text" id="question" placeholder="Masukkan pertanyaan">
+            </div>
+            
+            <div class="input-group">
+                <select id="question-type" onchange="changeQuestionType()">
+                    <option value="truefalse">Benar/Salah</option>
+                    <option value="multiple">Pilihan Ganda</option>
+                    <option value="text">Masukkan Jawaban</option>
+                    <option value="match">Mencocokkan</option>
+                </select>
+            </div>
+            
+            <div id="answer-inputs" class="answer-container"></div>
+            
+            <div class="input-group file-input">
+                <label for="media"><i class="fas fa-paperclip"></i> Lampirkan Media</label>
+                <input type="file" id="media" accept="image/*, audio/*, video/*">
+                <span id="file-name">Tidak ada file dipilih</span>
+            </div>
+            
+            <button class="btn primary" onclick="addQuestion()">
+                <i class="fas fa-plus"></i> Tambah Pertanyaan
+            </button>
+        </div>
+
+        <div class="card" id="questions-list-section">
+            <h2>Daftar Pertanyaan</h2>
+            <ul id="question-list" class="question-list"></ul>
+            <button id="start-quiz" class="btn success" onclick="showQuizOptions()" disabled>Mulai Kuis</button>
+        </div>
+
+        <div class="card" id="quiz-section" style="display: none;">
+            <div class="quiz-header">
+                <h2 id="quiz-title-display"></h2>
+                <p id="question-counter"></p>
+            </div>
+            
+            <div class="quiz-content">
+                <h3 id="quiz-question"></h3>
+                <div id="quiz-media" class="media-container"></div>
+                <div id="quiz-answers" class="answer-options"></div>
+                <div class="timer-container">
+                    <p id="timer"></p>
+                    <div id="timer-bar"></div>
+                </div>
+            </div>
+            
+            <div class="quiz-footer">
+                <button class="btn primary" onclick="checkAnswer()">Kirim Jawaban</button>
+                <p id="feedback" class="feedback"></p>
+            </div>
+        </div>
+
+        <div class="card" id="result-section" style="display: none;">
+            <h2>Hasil Kuis</h2>
+            <div class="result-content">
+                <div class="score-circle">
+                    <span id="score-percentage">0%</span>
+                </div>
+                <h3 id="result-title"></h3>
+                <p id="result"></p>
+                <div class="btn-group">
+                    <button class="btn primary" onclick="resetQuiz()">Buat Kuis Baru</button>
+                    <button class="btn secondary" onclick="showHistory()">Lihat Riwayat</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="history-section">
+            <h2>Riwayat Kuis</h2>
+            <ul id="history-list" class="history-list"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Muhammad Alfaridzi. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+  </html>
